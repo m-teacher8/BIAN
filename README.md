@@ -511,7 +511,7 @@
 
     <script>
         // استبدل هذا الرابط برابط التطبيق النصي الذي نشرته
-        const API_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+        const API_URL = 'https:/[/script.google.com/macros/s/YOUR_SCRIPT_ID/exec](https://docs.google.com/spreadsheets/d/1kTIrXx9-d2rxjDaM66--h2DTNgBKDAPgJMwDjz5mkDI/edit?usp=sharing)';
         
         // عناصر DOM
         const teacherForm = document.getElementById('teacherForm');
