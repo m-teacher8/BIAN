@@ -115,7 +115,7 @@
             };
             
             // استبدل هذا الرابط برابط نشر Google Apps Script الخاص بك
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzB_SZMdBHbCSn6lhuugvXgs3ftvfwg9RvHI87SAtuc0bSXi3hfwkQ5R-YgrMsxCXlhOQ/exec';
+            const scriptUrl = '[https://script.google.com/macros/s/AKfycbzB_SZMdBHbCSn6lhuugvXgs3ftvfwg9RvHI87SAtuc0bSXi3hfwkQ5R-YgrMsxCXlhOQ/exec](https://script.google.com/macros/s/AKfycbxlFI9uk-rkBP1XE8k6fcH8mub1sDb-_agcZCxNGTUNPc-3U_8USxCX7Sq8dknhQ7rqag/exec)';
             
             fetch(scriptUrl, {
                 method: 'POST',
