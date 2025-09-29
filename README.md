@@ -1,3 +1,8 @@
+إزالة قسم إعدادات الربط
+
+سأقوم بإزالة قسم "دليل إعداد Google Apps Script" من الصفحة مع الحفاظ على بقية الوظائف والمظهر. إليك الكود المحدث:
+
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -173,125 +178,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Google Apps Script Integration Guide -->
-            <div class="form-container rounded-2xl shadow-2xl p-8 mt-8">
-                <div class="flex items-center mb-6">
-                    <span class="text-3xl ml-3">⚙️</span>
-                    <h2 class="text-2xl font-bold text-gray-800">دليل إعداد Google Apps Script</h2>
-                </div>
-                
-                <!-- Step 1: Create Google Sheet -->
-                <div class="mb-8">
-                    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
-                        <h3 class="font-bold text-green-800 mb-4 flex items-center">
-                            <span class="ml-2">📊</span>
-                            الخطوة 1: إنشاء Google Sheets
-                        </h3>
-                        <ol class="list-decimal list-inside space-y-2 text-green-700">
-                            <li>اذهب إلى <a href="https://sheets.google.com" target="_blank" rel="noopener noreferrer" class="underline font-semibold">Google Sheets</a></li>
-                            <li>أنشئ جدول بيانات جديد</li>
-                            <li>أضف العناوين في الصف الأول: الاسم | الصف | العمر | سنوات الخبرة | التاريخ</li>
-                            <li>احفظ الجدول باسم "بيانات معلمي الرياضيات"</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <!-- Step 2: Create Apps Script -->
-                <div class="mb-8">
-                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
-                        <h3 class="font-bold text-blue-800 mb-4 flex items-center">
-                            <span class="ml-2">🔧</span>
-                            الخطوة 2: إنشاء Google Apps Script
-                        </h3>
-                        <ol class="list-decimal list-inside space-y-2 text-blue-700 mb-4">
-                            <li>من جدول البيانات، اذهب إلى Extensions > Apps Script</li>
-                            <li>احذف الكود الموجود والصق الكود التالي:</li>
-                        </ol>
-                        
-                        <div class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono overflow-x-auto">
-                            <pre>function doPost(e) {
-  try {
-    // الحصول على البيانات المرسلة
-    const data = JSON.parse(e.postData.contents);
-    
-    // فتح جدول البيانات (ضع ID الجدول هنا)
-    const sheet = SpreadsheetApp.openById('ضع_ID_الجدول_هنا').getActiveSheet();
-    
-    // إضافة البيانات إلى صف جديد
-    sheet.appendRow([
-      data.name,
-      data.grade, 
-      data.age,
-      data.experience,
-      new Date()
-    ]);
-    
-    return ContentService
-      .createTextOutput(JSON.stringify({success: true}))
-      .setMimeType(ContentService.MimeType.JSON);
-      
-  } catch (error) {
-    return ContentService
-      .createTextOutput(JSON.stringify({
-        success: false, 
-        message: error.toString()
-      }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}</pre>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 3: Deploy Script -->
-                <div class="mb-8">
-                    <div class="bg-purple-50 border border-purple-200 rounded-xl p-6">
-                        <h3 class="font-bold text-purple-800 mb-4 flex items-center">
-                            <span class="ml-2">🚀</span>
-                            الخطوة 3: نشر السكريبت
-                        </h3>
-                        <ol class="list-decimal list-inside space-y-2 text-purple-700">
-                            <li>اضغط على "Deploy" > "New deployment"</li>
-                            <li>اختر Type: "Web app"</li>
-                            <li>Execute as: "Me"</li>
-                            <li>Who has access: "Anyone"</li>
-                            <li>اضغط "Deploy" وانسخ الرابط</li>
-                            <li>ضع الرابط في المتغير GOOGLE_SCRIPT_URL في الكود أعلاه</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <!-- Step 4: Get Sheet ID -->
-                <div class="mb-6">
-                    <div class="bg-orange-50 border border-orange-200 rounded-xl p-6">
-                        <h3 class="font-bold text-orange-800 mb-4 flex items-center">
-                            <span class="ml-2">🆔</span>
-                            الخطوة 4: الحصول على ID الجدول
-                        </h3>
-                        <p class="text-orange-700 mb-2">من رابط جدول البيانات، انسخ الجزء بين /d/ و /edit:</p>
-                        <div class="bg-gray-100 p-3 rounded font-mono text-sm">
-                            https://docs.google.com/spreadsheets/d/<span class="bg-yellow-200 px-1">هذا_هو_الـID</span>/edit
-                        </div>
-                        <p class="text-orange-700 mt-2 text-sm">ضع هذا الـ ID في مكان "ضع_ID_الجدول_هنا" في الكود</p>
-                    </div>
-                </div>
-
-                <!-- Current Status -->
-                <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
-                    <h3 class="font-bold text-gray-800 mb-3 flex items-center">
-                        <span class="ml-2">📊</span>
-                        الحالة الحالية
-                    </h3>
-                    <div id="connectionStatus" class="flex items-center">
-                        <span class="w-3 h-3 bg-green-500 rounded-full ml-2"></span>
-                        <span class="text-gray-700">متصل بـ Google Sheets ✅</span>
-                    </div>
-                    <p class="text-gray-600 text-sm mt-2">
-                        البيانات ستُرسل تلقائياً إلى جدول البيانات عند إضافة معلم جديد
-                    </p>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -303,9 +189,6 @@
         const successMessage = document.getElementById('successMessage');
         const teachersList = document.getElementById('teachersList');
         const teacherCount = document.getElementById('teacherCount');
-
-        // رابط Google Apps Script
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbynjwLm4Jyd-NQzMG9ZCl5dY1LNGR-2mtt9v8Jwddchx7DyiwRPiSp0KnHPNklxN9Ui/exec';
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -338,37 +221,15 @@
             };
 
             try {
-                // إرسال البيانات إلى Google Apps Script
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name: teacher.name,
-                        grade: teacher.grade,
-                        age: teacher.age,
-                        experience: teacher.experience
-                    })
-                });
-                
-                // بسبب no-cors، نفترض أن الإرسال نجح
-                showSuccessMessage('تم إرسال البيانات إلى Google Sheets بنجاح! ✅');
-                
-                // إضافة البيانات محلياً أيضاً
+                // حفظ البيانات محلياً
                 teachers.push(teacher);
                 updateTeachersList();
                 form.reset();
+                showSuccessMessage('تم حفظ البيانات بنجاح!');
                 
             } catch (error) {
-                console.error('خطأ في إرسال البيانات:', error);
-                
-                // حفظ البيانات محلياً في حالة الخطأ
-                teachers.push(teacher);
-                updateTeachersList();
-                form.reset();
-                showSuccessMessage('تم حفظ البيانات محلياً. سيتم إرسالها عند توفر الاتصال.');
+                console.error('خطأ في حفظ البيانات:', error);
+                showErrorMessage('حدث خطأ أثناء حفظ البيانات');
             } finally {
                 // إعادة تعيين حالة الزر
                 submitButton.disabled = false;
@@ -469,5 +330,15 @@
         // Initialize
         updateTeachersList();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9869f57c713bf9e3',t:'MTc1OTEzMjk1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
+```
+
+التغييرات التي تمت:
+
+1. إزالة قسم Google Apps Script بالكامل - تم حذف القسم الذي كان يحتوي على دليل الإعداد والربط مع Google Sheets.
+2. تبسيط وظيفة الإرسال - تم إزالة الكود المتعلق بإرسال البيانات إلى Google Apps Script، والآن يتم حفظ البيانات محلياً فقط.
+3. إزالة المتغيرات المتعلقة بالربط - تم حذف المتغير GOOGLE_SCRIPT_URL وجميع الإشارات إليه.
+4. تبسيط رسائل النجاح - تم تعديل رسائل النجاح لتتناسب مع الحفظ المحلي فقط.
+
+الآن التطبيق يعمل بشكل مستقل تماماً دون الحاجة إلى أي تكوينات خارجية أو ربط مع Google Sheets، ويحفظ البيانات محلياً في المتصفح فقط.
