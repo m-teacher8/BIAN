@@ -50,6 +50,10 @@
                     <span class="text-white text-xs">∞</span>
                 </div>
             </div>
+            <div class="mt-3 text-center">
+                <p class="text-white text-sm font-semibold">إعداد أستاذ محمد المزروعي</p>
+                <p class="text-blue-100 text-xs">معلم أول مادة رياضيات</p>
+            </div>
         </div>
         
         <!-- Header -->
@@ -181,50 +185,7 @@
             </div>
         </div>
 
-        <!-- معلومات Google Sheets -->
-        <div class="mt-8 bg-white/90 rounded-xl p-6 card-shadow">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">تأكد من إعداد Google Apps Script:</h3>
-            <div class="bg-gray-100 p-4 rounded-lg text-sm font-mono">
-                <p class="font-bold text-gray-800 mb-2">الكود المطلوب في Google Apps Script:</p>
-                <pre class="text-gray-700">function doGet(e) {
-  try {
-    var sheet = SpreadsheetApp.getActiveSheet();
-    
-    var teacherName = e.parameter.teacherName || '';
-    var grade = e.parameter.grade || '';
-    var lesson = e.parameter.lesson || '';
-    var assessments = e.parameter.assessments || '';
-    var date = e.parameter.date || '';
-    
-    sheet.appendRow([
-      teacherName,
-      grade,
-      lesson,
-      assessments,
-      date,
-      new Date()
-    ]);
-    
-    return ContentService
-      .createTextOutput('تم الحفظ بنجاح')
-      .setMimeType(ContentService.MimeType.TEXT);
-      
-  } catch (error) {
-    return ContentService
-      .createTextOutput('خطأ: ' + error.toString())
-      .setMimeType(ContentService.MimeType.TEXT);
-  }
-}</pre>
-            </div>
-        </div>
 
-        <!-- معلومات الإعداد -->
-        <div class="mt-6 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl p-4 card-shadow border border-white/30">
-            <div class="text-center">
-                <p class="text-white text-lg font-semibold">إعداد: أ. محمد المزروعي</p>
-                <p class="text-blue-100 text-sm">معلم أول مادة رياضيات</p>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -295,5 +256,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'986cb0851124d1e0',t:'MTc1OTE2MTU4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'986cbe05e701f9fb',t:'MTc1OTE2MjEzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
