@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة بيانات معلمي الرياضيات</title>
+    <title>متابعة سير المنهج وأدوات التقويم</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -13,459 +13,287 @@
         .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        .form-container {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        .input-focus:focus {
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        .submit-btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            transition: all 0.3s ease;
         }
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-        .success-animation {
-            animation: successPulse 0.6s ease-in-out;
-        }
-        @keyframes successPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
         }
     </style>
 </head>
-<body class="gradient-bg min-h-screen">
-    <div class="container mx-auto px-4 py-8">
+<body class="gradient-bg min-h-screen py-8">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <!-- رقم 2025 المزخرف -->
+        <div class="absolute top-4 left-4 bg-white/20 backdrop-blur-sm rounded-2xl p-4 border border-white/30">
+            <div class="flex items-center space-x-2">
+                <svg class="w-8 h-8 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"/>
+                </svg>
+                <div class="text-3xl font-bold text-white tracking-wider" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                    <span class="text-yellow-300">2</span><span class="text-blue-200">0</span><span class="text-green-300">2</span><span class="text-pink-300">5</span>
+                </div>
+                <div class="flex flex-col space-y-1">
+                    <span class="text-white text-xs">π</span>
+                    <span class="text-white text-xs">∑</span>
+                    <span class="text-white text-xs">∞</span>
+                </div>
+            </div>
+        </div>
+        
         <!-- Header -->
         <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-lg mb-4">
-                <span class="text-4xl">📊</span>
-            </div>
-            <h1 class="text-4xl font-bold text-white mb-2">منصة بيانات معلمي الرياضيات</h1>
-            <p class="text-white/80 text-lg">نظام تسجيل وإدارة بيانات المعلمين</p>
+            <h1 class="text-4xl font-bold text-white mb-2">متابعة سير المنهج وأدوات التقويم</h1>
+            <h2 class="text-2xl text-blue-100 mb-2">مدرسة محمد بن سليمان الغافري</h2>
+            <h3 class="text-xl text-blue-200">مادة الرياضيات</h3>
         </div>
 
-        <div class="max-w-4xl mx-auto">
-            <!-- Form Section -->
-            <div class="form-container rounded-2xl shadow-2xl p-8 mb-8">
-                <div class="flex items-center mb-6">
-                    <span class="text-3xl ml-3">👨‍🏫</span>
-                    <h2 class="text-2xl font-bold text-gray-800">إضافة معلم جديد</h2>
+        <!-- Main Form -->
+        <div class="bg-white rounded-2xl p-8 card-shadow">
+            <form id="curriculumForm" class="space-y-6">
+                <!-- اسم المعلم -->
+                <div>
+                    <label class="block text-gray-700 text-lg font-semibold mb-3">اسم المعلم</label>
+                    <select id="studentName" class="form-input w-full p-4 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none text-lg" required>
+                        <option value="">اختر اسم المعلم</option>
+                        <option value="عمر بطيء">عمر بطيء</option>
+                        <option value="حمد الجابري">حمد الجابري</option>
+                        <option value="حمد السكيتي">حمد السكيتي</option>
+                        <option value="محمد المزروعي">محمد المزروعي</option>
+                        <option value="مجدي مبارك">مجدي مبارك</option>
+                        <option value="بشير المعمري">بشير المعمري</option>
+                        <option value="سفيان الأزهر">سفيان الأزهر</option>
+                        <option value="درويش الغافري">درويش الغافري</option>
+                        <option value="عبدالله الغافري">عبدالله الغافري</option>
+                        <option value="وليد الشلع">وليد الشلع</option>
+                    </select>
                 </div>
 
-                <form id="teacherForm" class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <!-- Name Field -->
-                        <div>
-                            <label for="teacherName" class="block text-sm font-semibold text-gray-700 mb-2">
-                                الاسم الكامل *
-                            </label>
-                            <input 
-                                type="text" 
-                                id="teacherName" 
-                                name="teacherName"
-                                required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-all duration-300 input-focus"
-                                placeholder="أدخل الاسم الكامل للمعلم"
-                            >
-                        </div>
-
-                        <!-- Grade Field -->
-                        <div>
-                            <label for="grade" class="block text-sm font-semibold text-gray-700 mb-2">
-                                الصف المدرس *
-                            </label>
-                            <select 
-                                id="grade" 
-                                name="grade"
-                                required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-all duration-300 input-focus"
-                            >
-                                <option value="">اختر الصف</option>
-                                <option value="الصف الأول">الصف الأول</option>
-                                <option value="الصف الثاني">الصف الثاني</option>
-                                <option value="الصف الثالث">الصف الثالث</option>
-                                <option value="الصف الرابع">الصف الرابع</option>
-                                <option value="الصف الخامس">الصف الخامس</option>
-                                <option value="الصف السادس">الصف السادس</option>
-                                <option value="الصف السابع">الصف السابع</option>
-                                <option value="الصف الثامن">الصف الثامن</option>
-                                <option value="الصف التاسع">الصف التاسع</option>
-                                <option value="الصف العاشر">الصف العاشر</option>
-                                <option value="الصف الحادي عشر">الصف الحادي عشر</option>
-                                <option value="الصف الثاني عشر">الصف الثاني عشر</option>
-                            </select>
-                        </div>
-
-                        <!-- Age Field -->
-                        <div>
-                            <label for="age" class="block text-sm font-semibold text-gray-700 mb-2">
-                                العمر *
-                            </label>
-                            <input 
-                                type="number" 
-                                id="age" 
-                                name="age"
-                                min="22" 
-                                max="65"
-                                required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-all duration-300 input-focus"
-                                placeholder="أدخل العمر"
-                            >
-                        </div>
-
-                        <!-- Experience Field -->
-                        <div>
-                            <label for="experience" class="block text-sm font-semibold text-gray-700 mb-2">
-                                سنوات الخبرة
-                            </label>
-                            <input 
-                                type="number" 
-                                id="experience" 
-                                name="experience"
-                                min="0" 
-                                max="40"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-all duration-300 input-focus"
-                                placeholder="أدخل سنوات الخبرة"
-                            >
-                        </div>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="text-center pt-4">
-                        <button 
-                            type="submit" 
-                            class="submit-btn bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:from-blue-700 hover:to-purple-700 shadow-lg"
-                        >
-                            <span class="flex items-center justify-center">
-                                <span class="ml-2">📤</span>
-                                إرسال البيانات
-                            </span>
-                        </button>
-                    </div>
-                </form>
-
-                <!-- Success Message -->
-                <div id="successMessage" class="hidden mt-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-xl text-center">
-                    <span class="text-2xl">✅</span>
-                    <p class="font-semibold mt-2">تم إرسال البيانات بنجاح!</p>
+                <!-- الصف -->
+                <div>
+                    <label class="block text-gray-700 text-lg font-semibold mb-3">الصف</label>
+                    <select id="grade" class="form-input w-full p-4 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none text-lg" required>
+                        <option value="">اختر الصف</option>
+                        <option value="خامس واحد">خامس واحد</option>
+                        <option value="خامس اثنين">خامس اثنين</option>
+                        <option value="خامس ثلاثة">خامس ثلاثة</option>
+                        <option value="خامس أربعة">خامس أربعة</option>
+                        <option value="خامس خمسة">خامس خمسة</option>
+                        <option value="خامس ستة">خامس ستة</option>
+                        <option value="سادس واحد">سادس واحد</option>
+                        <option value="سادس اثنين">سادس اثنين</option>
+                        <option value="سادس ثلاثة">سادس ثلاثة</option>
+                        <option value="سادس أربعة">سادس أربعة</option>
+                        <option value="سادس خمسة">سادس خمسة</option>
+                        <option value="سابع واحد">سابع واحد</option>
+                        <option value="سابع اثنين">سابع اثنين</option>
+                        <option value="سابع ثلاثة">سابع ثلاثة</option>
+                        <option value="سابع أربعة">سابع أربعة</option>
+                        <option value="سابع خمسة">سابع خمسة</option>
+                        <option value="ثامن واحد">ثامن واحد</option>
+                        <option value="ثامن اثنين">ثامن اثنين</option>
+                        <option value="ثامن ثلاثة">ثامن ثلاثة</option>
+                        <option value="ثامن أربعة">ثامن أربعة</option>
+                        <option value="تاسع واحد">تاسع واحد</option>
+                        <option value="تاسع اثنين">تاسع اثنين</option>
+                        <option value="تاسع ثلاثة">تاسع ثلاثة</option>
+                        <option value="عاشر واحد">عاشر واحد</option>
+                        <option value="عاشر اثنين">عاشر اثنين</option>
+                        <option value="عاشر ثلاثة">عاشر ثلاثة</option>
+                        <option value="عاشر أربعة">عاشر أربعة</option>
+                    </select>
                 </div>
-            </div>
 
-            <!-- Teachers List -->
-            <div class="form-container rounded-2xl shadow-2xl p-8">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="flex items-center">
-                        <span class="text-3xl ml-3">📋</span>
-                        <h2 class="text-2xl font-bold text-gray-800">قائمة المعلمين المسجلين</h2>
-                    </div>
-                    <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold">
-                        العدد: <span id="teacherCount">0</span>
+                <!-- الدرس -->
+                <div>
+                    <label class="block text-gray-700 text-lg font-semibold mb-3">الدرس</label>
+                    <textarea id="lesson" class="form-input w-full p-4 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none text-lg resize-none" rows="3" placeholder="اكتب عنوان الدرس هنا..." required></textarea>
+                </div>
+
+                <!-- أدوات التقويم -->
+                <div>
+                    <label class="block text-gray-700 text-lg font-semibold mb-3">ما تم إنجازه من أدوات التقويم</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-blue-300 cursor-pointer transition-colors">
+                            <input type="checkbox" name="assessment" value="سؤال قصير واحد" class="ml-3 w-5 h-5 text-blue-600">
+                            <span class="text-gray-700">سؤال قصير واحد</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-blue-300 cursor-pointer transition-colors">
+                            <input type="checkbox" name="assessment" value="سؤال قصير اثنين" class="ml-3 w-5 h-5 text-blue-600">
+                            <span class="text-gray-700">سؤال قصير اثنين</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-blue-300 cursor-pointer transition-colors">
+                            <input type="checkbox" name="assessment" value="اختبار قصير واحد" class="ml-3 w-5 h-5 text-blue-600">
+                            <span class="text-gray-700">اختبار قصير واحد</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-blue-300 cursor-pointer transition-colors">
+                            <input type="checkbox" name="assessment" value="اختبار قصير اثنين" class="ml-3 w-5 h-5 text-blue-600">
+                            <span class="text-gray-700">اختبار قصير اثنين</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-blue-300 cursor-pointer transition-colors">
+                            <input type="checkbox" name="assessment" value="واجب منزلي واحد" class="ml-3 w-5 h-5 text-blue-600">
+                            <span class="text-gray-700">واجب منزلي واحد</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-blue-300 cursor-pointer transition-colors">
+                            <input type="checkbox" name="assessment" value="واجب منزلي اثنين" class="ml-3 w-5 h-5 text-blue-600">
+                            <span class="text-gray-700">واجب منزلي اثنين</span>
+                        </label>
+                        <label class="flex items-center p-3 border-2 border-gray-200 rounded-xl hover:border-blue-300 cursor-pointer transition-colors md:col-span-2">
+                            <input type="checkbox" name="assessment" value="المشروع" class="ml-3 w-5 h-5 text-blue-600">
+                            <span class="text-gray-700">المشروع</span>
+                        </label>
                     </div>
                 </div>
 
-                <div id="teachersList" class="space-y-4">
-                    <div class="text-center text-gray-500 py-8">
-                        <span class="text-6xl">👥</span>
-                        <p class="mt-4 text-lg">لا توجد بيانات معلمين مسجلة بعد</p>
-                        <p class="text-sm text-gray-400">قم بإضافة معلم جديد باستخدام النموذج أعلاه</p>
-                    </div>
+                <!-- التاريخ -->
+                <div>
+                    <label class="block text-gray-700 text-lg font-semibold mb-3">التاريخ</label>
+                    <input type="date" id="date" class="form-input w-full p-4 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none text-lg" required>
+                </div>
+
+                <!-- زر الإرسال -->
+                <div class="text-center pt-4">
+                    <button type="submit" class="submit-btn text-white px-12 py-4 rounded-xl text-xl font-bold">
+                        إرسال البيانات
+                    </button>
+                </div>
+            </form>
+
+            <!-- رسالة النجاح -->
+            <div id="successMessage" class="hidden mt-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-xl text-center">
+                <div class="flex items-center justify-center">
+                    <svg class="w-6 h-6 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="font-semibold">تم إرسال البيانات بنجاح!</span>
                 </div>
             </div>
+        </div>
 
-            <!-- Google Apps Script Integration Guide -->
-            <div class="form-container rounded-2xl shadow-2xl p-8 mt-8">
-                <div class="flex items-center mb-6">
-                    <span class="text-3xl ml-3">⚙️</span>
-                    <h2 class="text-2xl font-bold text-gray-800">دليل إعداد Google Apps Script</h2>
-                </div>
-                
-                <!-- Step 1: Create Google Sheet -->
-                <div class="mb-8">
-                    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
-                        <h3 class="font-bold text-green-800 mb-4 flex items-center">
-                            <span class="ml-2">📊</span>
-                            الخطوة 1: إنشاء Google Sheets
-                        </h3>
-                        <ol class="list-decimal list-inside space-y-2 text-green-700">
-                            <li>اذهب إلى <a href="https://sheets.google.com" target="_blank" rel="noopener noreferrer" class="underline font-semibold">Google Sheets</a></li>
-                            <li>أنشئ جدول بيانات جديد</li>
-                            <li>أضف العناوين في الصف الأول: الاسم | الصف | العمر | سنوات الخبرة | التاريخ</li>
-                            <li>احفظ الجدول باسم "بيانات معلمي الرياضيات"</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <!-- Step 2: Create Apps Script -->
-                <div class="mb-8">
-                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
-                        <h3 class="font-bold text-blue-800 mb-4 flex items-center">
-                            <span class="ml-2">🔧</span>
-                            الخطوة 2: إنشاء Google Apps Script
-                        </h3>
-                        <ol class="list-decimal list-inside space-y-2 text-blue-700 mb-4">
-                            <li>من جدول البيانات، اذهب إلى Extensions > Apps Script</li>
-                            <li>احذف الكود الموجود والصق الكود التالي:</li>
-                        </ol>
-                        
-                        <div class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono overflow-x-auto">
-                            <pre>function doPost(e) {
+        <!-- معلومات Google Sheets -->
+        <div class="mt-8 bg-white/90 rounded-xl p-6 card-shadow">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">تأكد من إعداد Google Apps Script:</h3>
+            <div class="bg-gray-100 p-4 rounded-lg text-sm font-mono">
+                <p class="font-bold text-gray-800 mb-2">الكود المطلوب في Google Apps Script:</p>
+                <pre class="text-gray-700">function doGet(e) {
   try {
-    // الحصول على البيانات المرسلة
-    const data = JSON.parse(e.postData.contents);
+    var sheet = SpreadsheetApp.getActiveSheet();
     
-    // فتح جدول البيانات (ضع ID الجدول هنا)
-    const sheet = SpreadsheetApp.openById('ضع_ID_الجدول_هنا').getActiveSheet();
+    var teacherName = e.parameter.teacherName || '';
+    var grade = e.parameter.grade || '';
+    var lesson = e.parameter.lesson || '';
+    var assessments = e.parameter.assessments || '';
+    var date = e.parameter.date || '';
     
-    // إضافة البيانات إلى صف جديد
     sheet.appendRow([
-      data.name,
-      data.grade, 
-      data.age,
-      data.experience,
+      teacherName,
+      grade,
+      lesson,
+      assessments,
+      date,
       new Date()
     ]);
     
     return ContentService
-      .createTextOutput(JSON.stringify({success: true}))
-      .setMimeType(ContentService.MimeType.JSON);
+      .createTextOutput('تم الحفظ بنجاح')
+      .setMimeType(ContentService.MimeType.TEXT);
       
   } catch (error) {
     return ContentService
-      .createTextOutput(JSON.stringify({
-        success: false, 
-        message: error.toString()
-      }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .createTextOutput('خطأ: ' + error.toString())
+      .setMimeType(ContentService.MimeType.TEXT);
   }
 }</pre>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
 
-                <!-- Step 3: Deploy Script -->
-                <div class="mb-8">
-                    <div class="bg-purple-50 border border-purple-200 rounded-xl p-6">
-                        <h3 class="font-bold text-purple-800 mb-4 flex items-center">
-                            <span class="ml-2">🚀</span>
-                            الخطوة 3: نشر السكريبت
-                        </h3>
-                        <ol class="list-decimal list-inside space-y-2 text-purple-700">
-                            <li>اضغط على "Deploy" > "New deployment"</li>
-                            <li>اختر Type: "Web app"</li>
-                            <li>Execute as: "Me"</li>
-                            <li>Who has access: "Anyone"</li>
-                            <li>اضغط "Deploy" وانسخ الرابط</li>
-                            <li>ضع الرابط في المتغير GOOGLE_SCRIPT_URL في الكود أعلاه</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <!-- Step 4: Get Sheet ID -->
-                <div class="mb-6">
-                    <div class="bg-orange-50 border border-orange-200 rounded-xl p-6">
-                        <h3 class="font-bold text-orange-800 mb-4 flex items-center">
-                            <span class="ml-2">🆔</span>
-                            الخطوة 4: الحصول على ID الجدول
-                        </h3>
-                        <p class="text-orange-700 mb-2">من رابط جدول البيانات، انسخ الجزء بين /d/ و /edit:</p>
-                        <div class="bg-gray-100 p-3 rounded font-mono text-sm">
-                            https://docs.google.com/spreadsheets/d/<span class="bg-yellow-200 px-1">هذا_هو_الـID</span>/edit
-                        </div>
-                        <p class="text-orange-700 mt-2 text-sm">ضع هذا الـ ID في مكان "ضع_ID_الجدول_هنا" في الكود</p>
-                    </div>
-                </div>
-
-                <!-- Current Status -->
-                <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
-                    <h3 class="font-bold text-gray-800 mb-3 flex items-center">
-                        <span class="ml-2">📊</span>
-                        الحالة الحالية
-                    </h3>
-                    <div id="connectionStatus" class="flex items-center">
-                        <span class="w-3 h-3 bg-yellow-500 rounded-full ml-2"></span>
-                        <span class="text-gray-700">غير متصل بـ Google Sheets (يعمل محلياً فقط)</span>
-                    </div>
-                    <p class="text-gray-600 text-sm mt-2">
-                        بعد إعداد Google Apps Script، ستتمكن من إرسال البيانات مباشرة إلى Google Sheets
-                    </p>
-                </div>
+        <!-- معلومات الإعداد -->
+        <div class="mt-6 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl p-4 card-shadow border border-white/30">
+            <div class="text-center">
+                <p class="text-white text-lg font-semibold">إعداد: أ. محمد المزروعي</p>
+                <p class="text-blue-100 text-sm">معلم أول مادة رياضيات</p>
             </div>
         </div>
     </div>
 
     <script>
-        let teachers = [];
-        let teacherIdCounter = 1;
+        // تعيين التاريخ الحالي
+        document.getElementById('date').valueAsDate = new Date();
 
-        const form = document.getElementById('teacherForm');
-        const successMessage = document.getElementById('successMessage');
-        const teachersList = document.getElementById('teachersList');
-        const teacherCount = document.getElementById('teacherCount');
-
-        // رابط Google Apps Script (ضع الرابط الخاص بك هنا)
-        const GOOGLE_SCRIPT_URL = 'ضع_رابط_Google_Apps_Script_هنا';
-
-        form.addEventListener('submit', async function(e) {
+        // معالجة إرسال النموذج
+        document.getElementById('curriculumForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalText = submitButton.innerHTML;
-            
-            // تغيير حالة الزر أثناء الإرسال
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="flex items-center justify-center"><span class="ml-2">⏳</span>جاري الإرسال...</span>';
-            
-            const formData = new FormData(form);
-            const teacher = {
-                id: teacherIdCounter++,
-                name: formData.get('teacherName'),
-                grade: formData.get('grade'),
-                age: formData.get('age'),
-                experience: formData.get('experience') || 'غير محدد',
-                timestamp: new Date().toLocaleString('ar-SA')
+            // جمع البيانات
+            const formData = {
+                teacherName: document.getElementById('studentName').value,
+                grade: document.getElementById('grade').value,
+                lesson: document.getElementById('lesson').value,
+                assessments: Array.from(document.querySelectorAll('input[name="assessment"]:checked')).map(cb => cb.value),
+                date: document.getElementById('date').value
             };
 
-            try {
-                // إرسال البيانات إلى Google Apps Script
-                if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbz9G-G-gYOaZoY5sE1acjAh9MvlS_WUU7dM_Uh9tnSKjRIR6VuitF4Uc4s3JyyzSejwrQ/exec') {
-                    const response = await fetch(GOOGLE_SCRIPT_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            name: teacher.name,
-                            grade: teacher.grade,
-                            age: teacher.age,
-                            experience: teacher.experience
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (!result.success) {
-                        throw new Error(result.message || 'فشل في إرسال البيانات');
-                    }
-                    
-                    showSuccessMessage('تم إرسال البيانات إلى Google Sheets بنجاح! ✅');
-                } else {
-                    showSuccessMessage('تم حفظ البيانات محلياً (قم بإعداد رابط Google Apps Script)');
-                }
-                
-                // إضافة البيانات محلياً أيضاً
-                teachers.push(teacher);
-                updateTeachersList();
-                form.reset();
-                
-            } catch (error) {
-                console.error('خطأ في إرسال البيانات:', error);
-                showErrorMessage('حدث خطأ في إرسال البيانات: ' + error.message);
-                
-                // حفظ البيانات محلياً في حالة الخطأ
-                teachers.push(teacher);
-                updateTeachersList();
-                form.reset();
-            } finally {
-                // إعادة تعيين حالة الزر
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalText;
-            }
+            // إرسال البيانات باستخدام GET مع المعاملات
+            const params = new URLSearchParams();
+            params.append('teacherName', formData.teacherName);
+            params.append('grade', formData.grade);
+            params.append('lesson', formData.lesson);
+            params.append('assessments', formData.assessments.join(', '));
+            params.append('date', formData.date);
+
+            const url = 'https://script.google.com/macros/s/AKfycbwJdIE9Lkc_hsTqrIoN-t9y7-jH0nhWJcSqI_ljJX9U1XlIzw3FNctd402X-STfhsvJQw/exec?' + params.toString();
+
+            // استخدام iframe مخفي للإرسال
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = url;
+            document.body.appendChild(iframe);
+
+            console.log('البيانات المرسلة:', formData);
+            console.log('الرابط:', url);
+            
+            // إظهار رسالة النجاح
+            document.getElementById('successMessage').classList.remove('hidden');
+            
+            // إزالة الـ iframe بعد ثانيتين
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+            }, 2000);
+            
+            // إخفاء الرسالة بعد 3 ثوان
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.add('hidden');
+            }, 3000);
+
+            // إعادة تعيين النموذج
+            setTimeout(() => {
+                this.reset();
+                document.getElementById('date').valueAsDate = new Date();
+            }, 1000);
         });
 
-        function updateTeachersList() {
-            teacherCount.textContent = teachers.length;
+        // تأثيرات تفاعلية للنموذج
+        const inputs = document.querySelectorAll('.form-input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('transform', 'scale-105');
+            });
             
-            if (teachers.length === 0) {
-                teachersList.innerHTML = `
-                    <div class="text-center text-gray-500 py-8">
-                        <span class="text-6xl">👥</span>
-                        <p class="mt-4 text-lg">لا توجد بيانات معلمين مسجلة بعد</p>
-                        <p class="text-sm text-gray-400">قم بإضافة معلم جديد باستخدام النموذج أعلاه</p>
-                    </div>
-                `;
-                return;
-            }
-
-            teachersList.innerHTML = teachers.map(teacher => `
-                <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="flex items-start justify-between">
-                        <div class="flex-1">
-                            <div class="flex items-center mb-3">
-                                <span class="text-2xl ml-3">👨‍🏫</span>
-                                <h3 class="text-xl font-bold text-gray-800">${teacher.name}</h3>
-                            </div>
-                            
-                            <div class="grid md:grid-cols-3 gap-4 text-sm">
-                                <div class="flex items-center">
-                                    <span class="text-blue-600 ml-2">📚</span>
-                                    <span class="text-gray-600">الصف:</span>
-                                    <span class="font-semibold mr-2">${teacher.grade}</span>
-                                </div>
-                                
-                                <div class="flex items-center">
-                                    <span class="text-green-600 ml-2">🎂</span>
-                                    <span class="text-gray-600">العمر:</span>
-                                    <span class="font-semibold mr-2">${teacher.age} سنة</span>
-                                </div>
-                                
-                                <div class="flex items-center">
-                                    <span class="text-purple-600 ml-2">⭐</span>
-                                    <span class="text-gray-600">الخبرة:</span>
-                                    <span class="font-semibold mr-2">${teacher.experience}</span>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-3 text-xs text-gray-500">
-                                تاريخ التسجيل: ${teacher.timestamp}
-                            </div>
-                        </div>
-                        
-                        <button onclick="removeTeacher(${teacher.id})" class="text-red-500 hover:text-red-700 transition-colors duration-200 p-2">
-                            <span class="text-xl">🗑️</span>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function removeTeacher(id) {
-            teachers = teachers.filter(teacher => teacher.id !== id);
-            updateTeachersList();
-        }
-
-        function showSuccessMessage(message = 'تم إرسال البيانات بنجاح!') {
-            successMessage.innerHTML = `
-                <span class="text-2xl">✅</span>
-                <p class="font-semibold mt-2">${message}</p>
-            `;
-            successMessage.classList.remove('hidden');
-            successMessage.classList.add('success-animation');
-            
-            setTimeout(() => {
-                successMessage.classList.add('hidden');
-                successMessage.classList.remove('success-animation');
-            }, 4000);
-        }
-
-        function showErrorMessage(message) {
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'mt-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-xl text-center';
-            errorDiv.innerHTML = `
-                <span class="text-2xl">❌</span>
-                <p class="font-semibold mt-2">${message}</p>
-            `;
-            
-            form.parentNode.insertBefore(errorDiv, successMessage);
-            
-            setTimeout(() => {
-                errorDiv.remove();
-            }, 5000);
-        }
-
-        // Initialize
-        updateTeachersList();
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('transform', 'scale-105');
+            });
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9869d12c64fbf9fa',t:'MTc1OTEzMTQ2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'986cb0851124d1e0',t:'MTc1OTE2MTU4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
